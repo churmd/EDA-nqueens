@@ -18,7 +18,7 @@ class Individual {
       return len;
     }
     int getRowValue(int col);
-    int setRowValue(int col, int val);
+    void setRowValue(int col, int val);
     void randomValues();
     string toString();
 }
