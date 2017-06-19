@@ -1,4 +1,4 @@
-#include <stdexcep>
+#include <stdexcept>
 #include <random>
 
 #include "structures.h"
@@ -7,7 +7,7 @@ int Individual::getRowValue(int col){
   if(col < len && col >= 0){
     return rowValues[col];
   } else {
-    throw std::out_of_range("Indexed outside of Individual's length in get")
+    throw std::out_of_range("Indexed outside of Individual's length in get");
   }
 }
 
@@ -15,7 +15,7 @@ void Individual::setRowValue(int col, int val){
   if(col < len && col >=0){
     rowValues[col] = val;
   } else {
-    throw std::out_of_range("Indexed outside of Individual's length int set")
+    throw std::out_of_range("Indexed outside of Individual's length int set");
   }
 }
 
@@ -28,8 +28,8 @@ void Individual::randomValues(){
   }
 }
 
-string Individual::toString(){
-  string s = "|";
+std::string Individual::toString(){
+  std::string s = "|";
   for(int col = 0; col < len; col++){
       s = s + std::to_string(rowValues[col]) + "|";
   }

@@ -20,7 +20,7 @@ class Individual {
     int getRowValue(int col);
     void setRowValue(int col, int val);
     void randomValues();
-    string toString();
-}
+    std::string toString();
+};
 
 #endif
