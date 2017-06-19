@@ -35,3 +35,73 @@ std::string Individual::toString(){
   }
   return s;
 }
+
+ProbDist* ProbDist::makeNext(int column, int length, ProbDist *p){
+  ProbDist *pd = new ProbDist(column, length);
+  pd->setPrev(p);
+  return pd;
+}
+
+ProbDist::ProbDist(int column, int length){
+  prev = nullptr;
+  next = nullptr;
+  len = length;
+  colNum = column;
+  matrix = new int[length];
+
+  for(int i = 0; i < length; i++){
+    matrix[i] = 0;
+  }
+
+  if(column + 1 < length){
+    setNext(makeNext(column + 1, length, this));
+  }
+}
+ProbDist::~ProbDist(){
+  delete [] matrix;
+  if(next){
+    delete next;
+  }
+}
+
+int ProbDist::getValue(int col, int row){
+    if(col == colNum){
+      if(row < len && row >= 0){
+        return matrix[row];
+      } else {
+          throw std::out_of_range("Indexed outside of row range in ProbDist");
+      }
+    } else if(next != nullptr){
+      return next->getValue(col, row);
+    } else {
+      throw std::out_of_range("Indexed outside of column range in ProbDist");
+    }
+}
+
+void ProbDist::setValue(int col, int row, int val){
+    if(col == colNum){
+      if(row < len && row >= 0){
+        matrix[row] = val;
+      } else {
+          throw std::out_of_range("Indexed outside of row range in ProbDist");
+      }
+    } else if(next != nullptr){
+      return next->setValue(col, row, val);
+    } else {
+      throw std::out_of_range("Indexed outside of column range in ProbDist");
+    }
+}
+
+int ProbDist::getColumnTotal(int col){
+  if(col == colNum){
+    int total = 0;
+    for(int row = 0; row < len; row++){
+      total = total + matrix[row];
+    }
+    return total;
+  } else if(next != nullptr){
+    return next->getColumnTotal(col);
+  } else {
+    throw std::out_of_range("Indexed outside of column range in ProbDist");
+  }
+}
