@@ -1,4 +1,14 @@
+#include <stdexcept>
+#include <random>
+
 #include "edaAlgo.h"
+
+void deleteLists(std::list<Individual *> *l){
+    for(Individual *ind : *l){
+        delete ind;
+    }
+    delete l;
+}
 
 std::list<Individual *> *firstGen(int maxPop, int indLen){
     std::list<Individual *> *l = new std::list<Individual *>();
@@ -41,4 +51,69 @@ std::list<Individual *> *makeNewGen(ProbDist *pd, int boardSize, int popSize){
         l->push_back(ind);
     }
     return l;
+}
+
+int fitness(Individual *ind){
+    int attacks = 0;
+    for(int i = 0; i < ind->getLen(); i++){
+         for(int j = 0; j < ind->getLen(); j++){
+            //same queen, do nothing
+            if(i == j){
+                continue;
+            }
+            //same row attacks
+            if(ind->getRowValue(i) == ind->getRowValue(j)){
+                attacks++;
+            }
+            // diagonal attacks
+            if(abs(i - j) == abs(ind->getRowValue(i) - ind->getRowValue(j))){
+                attacks++;
+            }
+        }
+    }
+    return attacks;
+}
+
+void sortGeneration(std::list<Individual *> *gen){
+    gen->sort([](Individual *i1, Individual *i2){return fitness(i1) < fitness(i2);});
+}
+
+std::list<Individual *> *take(std::list<Individual *> *pop, int stopAt){
+    if(pop->size() < stopAt){
+        throw std::out_of_range("Tried to take more than the size of the list");
+    }
+    std::list<Individual *> *l = new std::list<Individual *>();
+    for(int i = 0; i < stopAt; i++){
+        l->push_back(pop->front());
+        pop->pop_front();
+    }
+    return l;
+}
+
+Individual *edaLoop(int boardSize, int maxIterations){
+    int maxPop = 80;
+    std::list<Individual *> *population = firstGen(maxPop, boardSize);
+    bool stop = false;
+    int iter = 0;
+    while(!stop){
+        sortGeneration(population);
+
+        if(iter == maxIterations || fitness(population->front()) == 0){
+            stop = true;
+        } else {
+
+            std::list<Individual *> *poptemp = take(population, maxPop/2);
+            ProbDist *pd = makeProbDist(poptemp, boardSize);
+
+            deleteLists(population);
+
+            population = makeNewGen(pd, boardSize, maxPop);
+            iter++;
+
+            deleteLists(poptemp);
+            delete pd;
+        }
+    }
+
+    return population->front();
 }
