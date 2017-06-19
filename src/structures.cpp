@@ -105,3 +105,12 @@ int ProbDist::getColumnTotal(int col){
     throw std::out_of_range("Indexed outside of column range in ProbDist");
   }
 }
+
+double ProbDist::getProb(int col, int row){
+  int total = 0;
+  while(row >= 0){
+    total = total + getValue(col, row);
+    row--;
+  }
+  return ((double) total) / getColumnTotal(col);
+}

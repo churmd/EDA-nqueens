@@ -1,6 +1,8 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
 
+#include <string>
+
 class Individual {
   private :
     int len;
@@ -47,6 +49,7 @@ class ProbDist {
     int getValue(int col, int row);
     void setValue(int col, int row, int val);
     int getColumnTotal(int col);
+    double getProb(int col, int row);
 };
 
 #endif
