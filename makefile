@@ -12,10 +12,15 @@ OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(wildcard $(SRC_DIR)/*.cpp)
 all : nqueens
 
 nqueens : $(OBJS)
-	@echo $(DEPS)
-	@echo $(OBJS)
 	$(CXX) -o $@ $^ $(CXXFLAGS) $(CXXVER)
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.cpp $(DEPS)
 	mkdir -p $(OBJ_DIR)
 	$(CXX) -c -o $@ $< $(CXXFLAGS) $(CXXVER)
+
+.PHONEY : clean
+
+clean :
+	rm -f $(OBJ_DIR)/*.o
+	rm -d $(OBJ_DIR)
+	rm -f nqueens
