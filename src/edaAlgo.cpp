@@ -90,7 +90,7 @@ std::list<Individual *> *take(std::list<Individual *> *pop, int stopAt){
     return l;
 }
 
-Individual *edaLoop(int boardSize, int maxIterations){
+Individual *edaLoop(int boardSize, int maxIterations, int iterModifier){
     int maxPop = 80;
     std::list<Individual *> *population = firstGen(maxPop, boardSize);
     bool stop = false;
@@ -108,12 +108,14 @@ Individual *edaLoop(int boardSize, int maxIterations){
             deleteLists(population);
 
             population = makeNewGen(pd, boardSize, maxPop);
-            iter++;
+            iter = iter + iterModifier;
 
             deleteLists(poptemp);
             delete pd;
         }
     }
-
-    return population->front();
+    Individual *best = population->front();
+    population->pop_front();
+    deleteLists(population);
+    return best;
 }

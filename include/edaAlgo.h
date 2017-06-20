@@ -17,6 +17,6 @@ void sortGeneration(std::list<Individual *> *gen);
 
 std::list<Individual *> *take(std::list<Individual *> *pop, int stopAt);
 
-Individual *edaLoop(int boardSize, int maxIterations);
+Individual *edaLoop(int boardSize, int maxIterations, int iterModifier);
 
 #endif
