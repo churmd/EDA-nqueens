@@ -50,7 +50,7 @@ ProbDist::ProbDist(int column, int length){
   matrix = new int[length];
 
   for(int i = 0; i < length; i++){
-    matrix[i] = 0;
+    matrix[i] = 1;
   }
 
   if(column + 1 < length){
