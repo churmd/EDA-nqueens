@@ -41,9 +41,10 @@ int main(int argc, char const *argv[]) {
   int iterModifier = 1;
   try {
     if(argc < 2){
-        cout << "No arguements passed, defualt values used." << endl;
         cout << "Usage: ./nqueens <number of queens> <maximum number of iterations> <iteration increment>" << endl;
         cout << "Set iteration increment to 0 for an unlimited number of iterations or 1 to cap iterations at the specified maximum value." << endl;
+        cout << endl;
+        cout << "No arguements passed, defualt values used." << endl;
         cout << "Number of Queens: " << queenNum << endl;
         cout << "Maximum number of iterations: " << maxIter << endl;
         cout << "Iteration increment value: " << iterModifier << endl;
@@ -60,6 +61,8 @@ int main(int argc, char const *argv[]) {
 
     Individual *best = edaLoop(queenNum, maxIter, iterModifier);
     cout << "Best solution found: " << best->toString() << endl;
+
+    delete best;
   } catch (const std::exception& e) {
     cout << e.what() << endl;
   }
