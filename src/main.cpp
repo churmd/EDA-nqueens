@@ -61,6 +61,7 @@ int main(int argc, char const *argv[]) {
 
     Individual *best = edaLoop(queenNum, maxIter, iterModifier);
     cout << "Best solution found: " << best->toString() << endl;
+    cout << best->showBoard() << endl;
 
     delete best;
   } catch (const std::exception& e) {

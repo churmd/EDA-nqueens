@@ -1,7 +1,7 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
 
-#include <string>
+class string;
 
 class Individual {
   private :
@@ -23,6 +23,7 @@ class Individual {
     void setRowValue(int col, int val);
     void randomValues();
     std::string toString();
+    std::string showBoard();
 };
 
 class ProbDist {

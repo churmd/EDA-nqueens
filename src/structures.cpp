@@ -36,6 +36,22 @@ std::string Individual::toString(){
   return s;
 }
 
+std::string Individual::showBoard(){
+  std::string board = "";
+  for(int row = 0; row < len; row++){
+    std::string s = "";
+    for(int col = 0; col < len; col++){
+      if(getRowValue(col) == row){
+        s = s + "Q ";
+      } else {
+        s = s + "- ";
+      }
+    }
+    board = board + s + "\n" ;
+  }
+  return board;
+}
+
 ProbDist* ProbDist::makeNext(int column, int length, ProbDist *p){
   ProbDist *pd = new ProbDist(column, length);
   pd->setPrev(p);
