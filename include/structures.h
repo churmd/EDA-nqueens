@@ -4,6 +4,17 @@
 //Forward declare
 class string;
 
+/**
+  Purpose: An Individual represents a single solution to the N-Queens problem, with each index in the rowValues array representing a column and the values stored are the corresponding rows.
+  Example: [1,3,0,2]
+  Coords : (0,1),(1,3),(2,0),(3,2)
+  Visually:
+     -> X
+   | - - Q -
+   v Q - - -
+   Y - - - Q
+     - Q - -
+*/
 class Individual {
   private :
     int len;
