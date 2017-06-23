@@ -1,3 +1,8 @@
+/**
+  structures.h
+  Purpose: Defines classes for the data structures used in the EDA. Specifically, this contains the implementations of the more complex functions.
+*/
+
 #include <stdexcept>
 #include <random>
 

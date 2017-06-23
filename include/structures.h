@@ -1,3 +1,8 @@
+/**
+  structures.h
+  Purpose: Defines classes for the data structures used in the EDA.
+*/
+
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
 
@@ -5,6 +10,7 @@
 class string;
 
 /**
+  class Individual
   Purpose: An Individual represents a single solution to the N-Queens problem, with each index in the rowValues array representing a column and the values stored are the corresponding rows.
   Example: [1,3,0,2]
   Table: Col | 0 1 2 3
@@ -40,6 +46,10 @@ class Individual {
     std::string showBoard();
 };
 
+/**
+  class ProbDist
+  Purpose: Produces a matrix from a population of Individual's that represents the distribution of the population. Can then be used to generate a new population based off of the probability of the distribution.
+*/
 class ProbDist {
   private :
     int len, colNum;
