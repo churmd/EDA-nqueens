@@ -1,6 +1,7 @@
 #ifndef STRUCTURE_H
 #define STRUCTURE_H
 
+//Forward declare
 class string;
 
 class Individual {
