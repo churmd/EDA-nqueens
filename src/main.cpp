@@ -40,6 +40,7 @@ int main(int argc, char const *argv[]) {
     delete best;
   } catch (const std::exception& e) {
     exitStat = 1;
+    cout << "Error encountered" << endl;
     cout << e.what() << endl;
   }
 
