@@ -91,6 +91,11 @@ std::list<Individual *> *take(std::list<Individual *> *pop, int stopAt){
 }
 
 Individual *edaLoop(int boardSize, int maxIterations, int iterModifier){
+  if(boardSize <= 0){
+    throw std::invalid_argument("Board size must be greater then 0");
+  } else if(maxIterations < 1){
+    throw std::invalid_argument("Maximum number of iterations must be 1 or greater");
+  } else {
     int maxPop = 80;
     std::list<Individual *> *population = firstGen(maxPop, boardSize);
     bool stop = false;
@@ -118,4 +123,5 @@ Individual *edaLoop(int boardSize, int maxIterations, int iterModifier){
     population->pop_front();
     deleteLists(population);
     return best;
+  }
 }
